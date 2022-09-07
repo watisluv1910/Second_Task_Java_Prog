@@ -1,4 +1,4 @@
-package com.secondTask.thirdSubtask;
+package com.secondTask;
 
 public class InitializationException extends Exception {
 

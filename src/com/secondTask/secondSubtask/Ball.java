@@ -1,5 +1,7 @@
 package com.secondTask.secondSubtask;
 
+import com.secondTask.InitializationException;
+
 public class Ball {
 
     private String manufacturer_, colour_, material_;

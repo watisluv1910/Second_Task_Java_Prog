@@ -1,18 +1,16 @@
 package com.secondTask.thirdSubtask;
 
-import java.util.Scanner;
-import java.util.function.Function;
+import com.secondTask.InitializationException;
+import com.secondTask.MyInput;
 
 public class ThirdSubtask {
-
-    private final static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
 
         Book book = new Book();
 
         while (true) {
-            Integer navigationVar = inputInteger("""
+            Integer navigationVar = MyInput.inputInteger("""
                Enter 1 to add a new book.
                Enter 2 to start reading.
                Enter 3 to view the information about current book.
@@ -25,10 +23,10 @@ public class ThirdSubtask {
                 case 2:
                     try {
                         System.out.println("You made a good progress! Today you've read "
-                                + book.read(inputInteger("Enter the number of ours you are planning to read:", Integer::valueOf),
-                                            inputInteger("Enter the number of words you read per minute:", Integer::valueOf))
+                                + book.read(MyInput.inputInteger("Enter the number of ours you are planning to read:", Integer::valueOf),
+                                            MyInput.inputInteger("Enter the number of words you read per minute:", Integer::valueOf))
                                 + " pages.");
-                    } catch (com.secondTask.thirdSubtask.InitializationException ex) {
+                    } catch (InitializationException ex) {
                         System.err.println(ex.getMessage());
                     }
                     break;
@@ -45,34 +43,10 @@ public class ThirdSubtask {
 
     public static Book InitBook() {
         Book newBook = new Book();
-        newBook.setAuthorName(inputString("Enter the author name: ", v -> v));
-        newBook.setTitle(inputString("Enter the title of the book: ", v -> v));
-        newBook.setCoverColour(inputString("Enter the cover colour: ", v -> v));
-        newBook.setTotalPages(inputInteger("Enter the total amount of pages", Integer::valueOf));
+        newBook.setAuthorName(MyInput.inputString("Enter the author name: ", v -> v));
+        newBook.setTitle(MyInput.inputString("Enter the title of the book: ", v -> v));
+        newBook.setCoverColour(MyInput.inputString("Enter the cover colour: ", v -> v));
+        newBook.setTotalPages(MyInput.inputInteger("Enter the total amount of pages", Integer::valueOf));
         return newBook;
-    }
-
-    private static <T> T inputInteger(String message, Function<Integer, T> converter) {
-        while (true) { // Чтобы не ругался на возможное отсутствие return'a
-            try {
-                System.out.println(message);
-                return converter.apply(scanner.nextInt());
-            } catch (Exception ex) {
-                System.err.println("Incorrect input format.");
-                System.exit(1);
-            }
-        }
-    }
-
-    private static <T> T inputString(String message, Function<String, T> converter) {
-        while (true) { // Чтобы не ругался на возможное отсутствие return'a
-            try {
-                System.out.println(message);
-                return converter.apply(scanner.next());
-            } catch (Exception ex) {
-                System.err.println("Incorrect input format.");
-                System.exit(1);
-            }
-        }
     }
 }

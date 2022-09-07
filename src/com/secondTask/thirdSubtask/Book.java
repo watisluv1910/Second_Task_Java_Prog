@@ -1,5 +1,7 @@
 package com.secondTask.thirdSubtask;
 
+import com.secondTask.InitializationException;
+
 public class Book {
 
     private String authorName, title, coverColour;
@@ -7,10 +9,6 @@ public class Book {
 
     private final Integer MINS_IN_HOUR = 60;
     private final Integer WORDS_IN_PAGE = 521;
-
-    public Integer getCurrPage() {
-        return currPage;
-    }
 
     public void setAuthorName(String authorName) {
         this.authorName = authorName;
@@ -28,11 +26,7 @@ public class Book {
         this.totalPages = totalPages;
     }
 
-    public void setCurrPage(Integer currPage) {
-        this.currPage = currPage;
-    }
-
-    public int read(Integer readingHours, Integer wordsPerMinute) throws InitializationException{
+    public int read(Integer readingHours, Integer wordsPerMinute) throws InitializationException {
 
         if (this.totalPages == null) throw new InitializationException("The book hasn't been chosen yet.");
 
